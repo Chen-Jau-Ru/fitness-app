@@ -9,219 +9,219 @@
 <title>健身助手</title>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
 <style>
-:root{
-  --bg:#F5F1EB;
-  --surface:#FFFFFF;
-  --surface2:#FAF8F5;
-  --border:#E8E2D9;
-  --border2:#D9D0C4;
-  --accent:#B07850;
-  --accent2:#96623D;
-  --accent-soft:rgba(176,120,80,0.08);
-  --green:#7B9E6B;
-  --green-soft:rgba(123,158,107,0.1);
-  --red:#C46B5C;
-  --text:#3D3229;
-  --text2:#7A6E62;
-  --text3:#AEA395;
-  --radius:12px;
-  --radius-sm:8px;
-  --nav-height:64px;
-  --safe-bottom:env(safe-area-inset-bottom,0px);
-}
+:root{--bg:#F5F1EB;--surface:#FFFFFF;--surface2:#FAF8F5;--border:#E8E2D9;--border2:#D9D0C4;--accent:#B07850;--accent2:#96623D;--accent-soft:rgba(176,120,80,0.08);--green:#7B9E6B;--green-soft:rgba(123,158,107,0.1);--red:#C46B5C;--text:#3D3229;--text2:#7A6E62;--text3:#AEA395;--radius:12px;--radius-sm:8px;--nav-height:64px;--safe-bottom:env(safe-area-inset-bottom,0px)}
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-body{font-family:'Noto Sans TC',-apple-system,sans-serif;background:var(--bg);color:var(--text);min-height:100dvh;overflow-x:hidden;padding-bottom:calc(var(--nav-height) + var(--safe-bottom) + 12px);font-weight:400;letter-spacing:0.2px;font-size:14px}
-button{font-family:inherit;border:none;cursor:pointer}input,select,textarea{font-family:inherit}
-
+body{font-family:'Noto Sans TC',-apple-system,sans-serif;background:var(--bg);color:var(--text);min-height:100dvh;overflow-x:hidden;padding-bottom:calc(var(--nav-height) + var(--safe-bottom) + 12px);font-size:14px}
+button{font-family:inherit;border:none;cursor:pointer}input{font-family:inherit}
 .nav{position:fixed;bottom:0;left:0;right:0;height:calc(var(--nav-height) + var(--safe-bottom));padding-bottom:var(--safe-bottom);background:var(--surface);display:flex;justify-content:space-around;align-items:center;z-index:100;border-top:1px solid var(--border)}
-.nav-btn{display:flex;flex-direction:column;align-items:center;gap:2px;background:none;color:var(--text3);font-size:10px;font-weight:500;padding:8px 16px;transition:color .2s}
-.nav-btn.active{color:var(--accent)}
-.nav-btn .nav-icon{font-size:20px;line-height:1}
-
-.page{display:none;padding:24px 20px;animation:fadeIn .3s ease}.page.active{display:block}
+.nav-btn{display:flex;flex-direction:column;align-items:center;gap:2px;background:none;color:var(--text3);font-size:10px;font-weight:500;padding:8px 12px;transition:color .2s}
+.nav-btn.active{color:var(--accent)}.nav-btn .ni{font-size:18px;line-height:1}
+.page{display:none;padding:20px 16px;animation:fadeIn .3s ease}.page.active{display:block}
 @keyframes fadeIn{from{opacity:0}to{opacity:1}}
-
-.page-header{font-size:20px;font-weight:700;margin-bottom:4px;color:var(--text)}
-.page-sub{color:var(--text3);font-size:12px;margin-bottom:24px;font-weight:400}
-
+.ph{font-size:20px;font-weight:700;margin-bottom:4px}.ps{color:var(--text3);font-size:12px;margin-bottom:20px}
 .card{background:var(--surface);border-radius:var(--radius);padding:16px;margin-bottom:10px;border:1px solid var(--border)}
-.card-title{font-size:13px;font-weight:700;margin-bottom:10px;color:var(--text)}
-
-.ex-item{display:flex;align-items:center;gap:12px;padding:14px 16px;margin:0;background:var(--surface);border-bottom:1px solid var(--border);transition:background .15s}
-.ex-item:first-child{border-radius:var(--radius) var(--radius) 0 0}
-.ex-item:last-child{border-radius:0 0 var(--radius) var(--radius);border-bottom:none}
-.ex-item:only-child{border-radius:var(--radius)}
-.ex-item:active{background:var(--surface2)}
-.ex-list{border-radius:var(--radius);overflow:hidden;border:1px solid var(--border)}
-.ex-num{min-width:28px;height:28px;display:flex;align-items:center;justify-content:center;border-radius:6px;font-size:12px;font-weight:700;background:var(--accent-soft);color:var(--accent)}
-.ex-info{flex:1;min-width:0}.ex-name{font-size:13px;font-weight:500;color:var(--text)}.ex-detail{font-size:11px;color:var(--text3);margin-top:2px}
-.ex-yt{width:32px;height:32px;border-radius:8px;background:rgba(196,107,92,0.08);color:var(--red);display:flex;align-items:center;justify-content:center;font-size:13px;text-decoration:none;flex-shrink:0}
-.ex-yt:empty{display:none}
-
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;padding:12px 24px;border-radius:var(--radius-sm);font-size:13px;font-weight:500;transition:all .15s}
-.btn:active{transform:scale(0.98)}
-.btn-primary{background:var(--accent);color:white}
-.btn-outline{background:var(--surface);color:var(--text);border:1px solid var(--border)}
-.btn-sm{padding:8px 16px;font-size:12px}.btn-full{width:100%}
-
-.filter-row{display:flex;gap:6px;margin-bottom:20px;overflow-x:auto;padding-bottom:2px;-webkit-overflow-scrolling:touch}.filter-row::-webkit-scrollbar{display:none}
-.filter-chip{padding:8px 16px;border-radius:20px;background:var(--surface);color:var(--text2);font-size:12px;font-weight:500;white-space:nowrap;border:1px solid var(--border);transition:all .2s}
-.filter-chip.active{background:var(--accent);color:white;border-color:var(--accent)}
-
-.log-input-group{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin:10px 0}
-.log-input{background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:11px;color:var(--text);font-size:15px;text-align:center;width:100%;font-weight:500}
-.log-input::placeholder{color:var(--text3);font-size:12px;font-weight:400}.log-input:focus{outline:none;border-color:var(--accent);background:white}
-
-.timer-card{background:var(--surface);border-radius:var(--radius);padding:24px;margin-bottom:16px;border:1px solid var(--border);text-align:center}
-.timer-display{font-size:48px;font-weight:700;text-align:center;font-variant-numeric:tabular-nums;color:var(--accent);margin:16px 0;letter-spacing:2px}
-.timer-label{text-align:center;color:var(--text2);font-size:13px;font-weight:500}
-.timer-controls{display:flex;gap:8px;justify-content:center;margin-top:16px}
-
-.history-date{font-size:11px;font-weight:700;color:var(--text3);padding:12px 0 6px;border-bottom:1px solid var(--border);margin-top:8px;text-transform:uppercase;letter-spacing:1px}
-.history-row{display:grid;grid-template-columns:1fr auto auto auto;gap:8px;padding:10px 0;border-bottom:1px solid rgba(232,226,217,0.5);font-size:12px;align-items:center}
-.history-row span:first-child{font-weight:500}.history-row span:not(:first-child){text-align:right;color:var(--text2)}
-
-.section-label{font-size:11px;font-weight:700;color:var(--text3);margin:24px 0 10px;text-transform:uppercase;letter-spacing:1.5px}
-
-.loading{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:48px;color:var(--text3);font-size:13px}
-.spinner{width:24px;height:24px;border:2px solid var(--border);border-top-color:var(--accent);border-radius:50%;animation:spin .8s linear infinite;margin-bottom:12px}
+.ct{font-size:13px;font-weight:700;margin-bottom:10px}
+.el{border-radius:var(--radius);overflow:hidden;border:1px solid var(--border)}
+.ei{display:flex;align-items:center;gap:12px;padding:13px 16px;background:var(--surface);border-bottom:1px solid var(--border);transition:background .15s}
+.ei:last-child{border-bottom:none}.ei:active{background:var(--surface2)}
+.en{min-width:28px;height:28px;display:flex;align-items:center;justify-content:center;border-radius:6px;font-size:12px;font-weight:700;background:var(--accent-soft);color:var(--accent)}
+.ef{flex:1;min-width:0}.nm{font-size:13px;font-weight:500}.dt{font-size:11px;color:var(--text3);margin-top:2px}
+.yt{width:32px;height:32px;border-radius:8px;background:rgba(196,107,92,0.08);color:var(--red);display:flex;align-items:center;justify-content:center;font-size:13px;text-decoration:none;flex-shrink:0}.yt:empty{display:none}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;padding:12px 24px;border-radius:var(--radius-sm);font-size:13px;font-weight:500;transition:all .15s}.btn:active{transform:scale(0.98)}
+.bp{background:var(--accent);color:white}.bo{background:var(--surface);color:var(--text);border:1px solid var(--border)}.bs{padding:8px 16px;font-size:12px}.bf{width:100%}
+.fr{display:flex;gap:6px;margin-bottom:16px;overflow-x:auto;padding-bottom:2px;-webkit-overflow-scrolling:touch}.fr::-webkit-scrollbar{display:none}
+.fc{padding:8px 14px;border-radius:20px;background:var(--surface);color:var(--text2);font-size:12px;font-weight:500;white-space:nowrap;border:1px solid var(--border);transition:all .2s}
+.fc.active{background:var(--accent);color:white;border-color:var(--accent)}
+.lig{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin:10px 0}
+.li{background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:11px;color:var(--text);font-size:15px;text-align:center;width:100%;font-weight:500}
+.li::placeholder{color:var(--text3);font-size:12px;font-weight:400}.li:focus{outline:none;border-color:var(--accent);background:white}
+.tc{background:var(--surface);border-radius:var(--radius);padding:24px;margin-bottom:16px;border:1px solid var(--border);text-align:center}
+.td{font-size:48px;font-weight:700;font-variant-numeric:tabular-nums;color:var(--accent);margin:16px 0;letter-spacing:2px}
+.tl{color:var(--text2);font-size:13px;font-weight:500}
+.tcs{display:flex;gap:8px;justify-content:center;margin-top:16px}
+.hd{font-size:11px;font-weight:700;color:var(--text3);padding:12px 0 6px;border-bottom:1px solid var(--border);margin-top:8px;letter-spacing:1px}
+.hr{display:grid;grid-template-columns:1fr auto auto auto;gap:8px;padding:10px 0;border-bottom:1px solid rgba(232,226,217,0.5);font-size:12px;align-items:center}
+.hr span:first-child{font-weight:500}.hr span:not(:first-child){text-align:right;color:var(--text2)}
+.sl{font-size:11px;font-weight:700;color:var(--text3);margin:20px 0 10px;letter-spacing:1.5px}
+.ld{display:flex;flex-direction:column;align-items:center;padding:48px;color:var(--text3);font-size:13px}
+.sp{width:24px;height:24px;border:2px solid var(--border);border-top-color:var(--accent);border-radius:50%;animation:spin .8s linear infinite;margin-bottom:12px}
 @keyframes spin{to{transform:rotate(360deg)}}
-
-.check-item{display:flex;align-items:center;gap:12px;padding:14px 16px;background:var(--surface);border-bottom:1px solid var(--border);transition:all .2s}
-.check-item:active{background:var(--surface2)}
-.check-item.done{opacity:0.4}.check-item.done .ex-name{text-decoration:line-through}
-.check-list{border-radius:var(--radius);overflow:hidden;border:1px solid var(--border)}
-.check-list .check-item:last-child{border-bottom:none}
-.checkbox{width:22px;height:22px;border-radius:6px;border:1.5px solid var(--border2);background:white;display:flex;align-items:center;justify-content:center;transition:all .2s;flex-shrink:0;font-size:12px;color:transparent}
-.check-item.done .checkbox{background:var(--green);border-color:var(--green);color:white}
-
-.toast{position:fixed;top:20px;left:50%;transform:translateX(-50%) translateY(-80px);background:var(--text);color:white;padding:10px 24px;border-radius:var(--radius-sm);font-size:13px;font-weight:500;z-index:200;transition:transform .3s ease}
-.toast.show{transform:translateX(-50%) translateY(0)}
-
-.empty{text-align:center;padding:48px 20px;color:var(--text3);font-size:13px}
-.menu-banner{background:var(--accent-soft);border:1px solid rgba(176,120,80,0.15);border-radius:var(--radius);padding:12px 16px;margin-bottom:16px;font-size:12px;color:var(--accent2);font-weight:500}
+.cl{border-radius:var(--radius);overflow:hidden;border:1px solid var(--border)}
+.ci{display:flex;align-items:center;gap:12px;padding:13px 16px;background:var(--surface);border-bottom:1px solid var(--border);transition:all .2s}
+.ci:last-child{border-bottom:none}.ci:active{background:var(--surface2)}.ci.done{opacity:0.4}.ci.done .nm{text-decoration:line-through}
+.cb{width:22px;height:22px;border-radius:6px;border:1.5px solid var(--border2);background:white;display:flex;align-items:center;justify-content:center;transition:all .2s;flex-shrink:0;font-size:12px;color:transparent}
+.ci.done .cb{background:var(--green);border-color:var(--green);color:white}
+.toast{position:fixed;top:20px;left:50%;transform:translateX(-50%) translateY(-80px);background:var(--text);color:white;padding:10px 24px;border-radius:var(--radius-sm);font-size:13px;font-weight:500;z-index:200;transition:transform .3s ease}.toast.show{transform:translateX(-50%) translateY(0)}
+.empty{text-align:center;padding:40px 20px;color:var(--text3);font-size:13px}
+.mb{background:var(--accent-soft);border:1px solid rgba(176,120,80,0.15);border-radius:var(--radius);padding:12px 16px;margin-bottom:12px;font-size:12px;color:var(--accent2);font-weight:500}
 </style>
 </head>
 <body>
 <div class="toast" id="toast"></div>
 
+<!-- TRAINING -->
 <div class="page active" id="page-train">
-<div class="page-header">今日訓練</div>
-<div class="page-sub" id="today-date"></div>
-<div class="filter-row" id="train-filter">
-<button class="filter-chip active" data-type="全部">全部</button>
-<button class="filter-chip" data-type="上肢推">上肢推</button>
-<button class="filter-chip" data-type="上肢拉">上肢拉</button>
-<button class="filter-chip" data-type="膝主導">膝主導</button>
-<button class="filter-chip" data-type="髖主導">髖主導</button>
-</div>
-<div id="today-menu-section" style="display:none">
-<div class="section-label">今日菜單</div>
-<div class="menu-banner" id="menu-banner"></div>
-<div class="ex-list" id="today-menu-list"></div>
-</div>
-<div class="section-label">動作庫</div>
-<div class="ex-list" id="exercise-list"><div class="loading"><div class="spinner"></div>載入中</div></div>
+<div class="ph">訓練</div>
+<div class="ps" id="today-date"></div>
+<div class="fr" id="tf"><button class="fc active" data-v="上肢推">上肢推</button><button class="fc" data-v="上肢拉">上肢拉</button><button class="fc" data-v="下肢">下肢</button><button class="fc" data-v="核心">核心</button><button class="fc" data-v="居家">居家</button><button class="fc" data-v="替補">替補</button></div>
+<div id="train-content"><div class="ld"><div class="sp"></div>載入中</div></div>
 </div>
 
+<!-- LOG -->
 <div class="page" id="page-log">
-<div class="page-header">訓練紀錄</div>
-<div class="page-sub">記錄每一組的重量和次數</div>
+<div class="ph">紀錄</div>
+<div class="ps">記錄每一組的重量和次數</div>
 <div id="log-active" style="display:none">
-<div class="card" id="log-current-exercise">
-<div class="card-title" id="log-ex-name"></div>
-<div style="color:var(--text3);font-size:11px;margin-bottom:12px" id="log-ex-info"></div>
-<div class="log-input-group">
-<div><div style="font-size:10px;color:var(--text3);margin-bottom:4px;text-align:center;font-weight:500;text-transform:uppercase;letter-spacing:1px">組數</div><input class="log-input" type="number" id="log-sets" placeholder="—" inputmode="numeric"></div>
-<div><div style="font-size:10px;color:var(--text3);margin-bottom:4px;text-align:center;font-weight:500;text-transform:uppercase;letter-spacing:1px">次數</div><input class="log-input" type="number" id="log-reps" placeholder="—" inputmode="numeric"></div>
-<div><div style="font-size:10px;color:var(--text3);margin-bottom:4px;text-align:center;font-weight:500;text-transform:uppercase;letter-spacing:1px">重量</div><input class="log-input" type="number" id="log-weight" placeholder="kg" inputmode="decimal"></div>
-</div>
-<input class="log-input" type="text" id="log-notes" placeholder="備註（選填）" style="width:100%;margin:8px 0;text-align:left;font-size:13px">
-<button class="btn btn-primary btn-full" onclick="saveLog()">記錄</button>
-</div>
-<div class="section-label">今日紀錄</div>
-<div id="log-today-list"></div>
-</div>
-<div id="log-empty"><div class="empty">從「今日訓練」選一個動作開始記錄</div></div>
-<div class="section-label">歷史紀錄</div>
-<div id="log-history"><div class="loading"><div class="spinner"></div>載入中</div></div>
+<div class="card" id="log-ex"><div class="ct" id="log-nm"></div><div style="color:var(--text3);font-size:11px;margin-bottom:12px" id="log-info"></div>
+<div class="lig"><div><div style="font-size:10px;color:var(--text3);margin-bottom:4px;text-align:center;letter-spacing:1px">組數</div><input class="li" type="number" id="l-sets" placeholder="—" inputmode="numeric"></div><div><div style="font-size:10px;color:var(--text3);margin-bottom:4px;text-align:center;letter-spacing:1px">次數</div><input class="li" type="number" id="l-reps" placeholder="—" inputmode="numeric"></div><div><div style="font-size:10px;color:var(--text3);margin-bottom:4px;text-align:center;letter-spacing:1px">重量</div><input class="li" type="number" id="l-wt" placeholder="kg" inputmode="decimal"></div></div>
+<input class="li" type="text" id="l-note" placeholder="備註（選填）" style="width:100%;margin:8px 0;text-align:left;font-size:13px">
+<button class="btn bp bf" onclick="saveLog()">記錄</button></div>
+<div class="sl">今日紀錄</div><div id="log-today"></div></div>
+<div id="log-empty"><div class="empty">從「訓練」選一個動作開始記錄</div></div>
+<div class="sl">歷史紀錄</div><div id="log-hist"><div class="ld"><div class="sp"></div>載入中</div></div>
 </div>
 
+<!-- WARMUP -->
 <div class="page" id="page-warmup">
-<div class="page-header">熱身 / 收操</div>
-<div class="page-sub">久坐修復 → 熱身 → 訓練 → 收操 → 晚間修復</div>
-<div class="filter-row" id="warmup-filter">
-<button class="filter-chip active" data-section="sedentary">久坐修復</button>
-<button class="filter-chip" data-section="warmup">熱身</button>
-<button class="filter-chip" data-section="cooldown">收操</button>
-<button class="filter-chip" data-section="evening">晚間修復</button>
-</div>
-<div class="filter-row" id="warmup-type-filter" style="display:none">
-<button class="filter-chip active" data-part="上肢推">上肢推</button>
-<button class="filter-chip" data-part="上肢拉">上肢拉</button>
-<button class="filter-chip" data-part="膝主導">膝主導</button>
-<button class="filter-chip" data-part="髖主導">髖主導</button>
-</div>
-<div id="warmup-list"></div>
+<div class="ph">熱身</div>
+<div class="ps">日常拉伸 · 上肢熱身 · 下肢熱身</div>
+<div class="fr" id="wf"><button class="fc active" data-v="日常拉伸">日常拉伸</button><button class="fc" data-v="上肢">上肢熱身</button><button class="fc" data-v="下肢">下肢熱身</button></div>
+<div id="warmup-content"></div>
 </div>
 
+<!-- EVENING -->
+<div class="page" id="page-evening">
+<div class="ph">晚間恢復</div>
+<div class="ps">收操 · 泡沫軸 · 體態矯正</div>
+<div class="fr" id="ef"><button class="fc active" data-v="固定開場">開場</button><button class="fc" data-v="上肢日">上肢日</button><button class="fc" data-v="下肢日">下肢日</button><button class="fc" data-v="圓肩">圓肩</button><button class="fc" data-v="骨盆前傾">骨盆前傾</button><button class="fc" data-v="扁平足">扁平足</button></div>
+<div id="evening-content"></div>
+</div>
+
+<!-- BEDTIME -->
 <div class="page" id="page-bedtime">
-<div class="page-header">睡前拉伸</div>
-<div class="page-sub">每天固定流程，放鬆入睡</div>
-<div class="timer-card" id="bedtime-timer-card" style="display:none">
-<div class="timer-label" id="timer-exercise-name"></div>
-<div class="timer-display" id="timer-display">00:00</div>
-<div class="timer-controls">
-<button class="btn btn-outline btn-sm" onclick="timerControl('reset')">重置</button>
-<button class="btn btn-primary" onclick="timerControl('toggle')" id="timer-toggle-btn">開始</button>
-<button class="btn btn-outline btn-sm" onclick="timerControl('next')">下一個</button>
-</div>
-</div>
-<div id="bedtime-list"></div>
+<div class="ph">睡前拉伸</div>
+<div class="ps">在床上做，放鬆入睡</div>
+<div class="tc" id="bt-card" style="display:none"><div class="tl" id="bt-name"></div><div class="td" id="bt-time">00:00</div><div class="tcs"><button class="btn bo bs" onclick="tmr('reset')">重置</button><button class="btn bp" onclick="tmr('toggle')" id="bt-btn">開始</button><button class="btn bo bs" onclick="tmr('next')">下一個</button></div></div>
+<div id="bedtime-content"></div>
 </div>
 
 <nav class="nav">
-<button class="nav-btn active" onclick="switchPage('train')" data-page="train"><span class="nav-icon">◎</span><span>訓練</span></button>
-<button class="nav-btn" onclick="switchPage('log')" data-page="log"><span class="nav-icon">□</span><span>紀錄</span></button>
-<button class="nav-btn" onclick="switchPage('warmup')" data-page="warmup"><span class="nav-icon">○</span><span>熱身收操</span></button>
-<button class="nav-btn" onclick="switchPage('bedtime')" data-page="bedtime"><span class="nav-icon">☽</span><span>睡前拉伸</span></button>
+<button class="nav-btn active" onclick="go('train')" data-p="train"><span class="ni">◎</span><span>訓練</span></button>
+<button class="nav-btn" onclick="go('log')" data-p="log"><span class="ni">□</span><span>紀錄</span></button>
+<button class="nav-btn" onclick="go('warmup')" data-p="warmup"><span class="ni">○</span><span>熱身</span></button>
+<button class="nav-btn" onclick="go('evening')" data-p="evening"><span class="ni">◐</span><span>晚間</span></button>
+<button class="nav-btn" onclick="go('bedtime')" data-p="bedtime"><span class="ni">☽</span><span>睡前</span></button>
 </nav>
 
 <script>
-const API_URL='https://script.google.com/macros/s/AKfycbxgOx4n6IUBY9nlb6RxuJQzFDec0lbT7z0SZjjkeIlHRDfNiZknX7u7Ap-51UmWGBpG/exec';
-let exercises=[],todayLog=[],currentLogExercise=null,timerInterval=null,timerSeconds=0,timerTarget=0,timerRunning=false,currentBedtimeIndex=0;
+const API='https://script.google.com/macros/s/AKfycbxgOx4n6IUBY9nlb6RxuJQzFDec0lbT7z0SZjjkeIlHRDfNiZknX7u7Ap-51UmWGBpG/exec';
+let EX=[],LOG=[],CUR=null,TI=null,TS=0,TT=0,TR=false,BI=0;
+const TD=fmtD(new Date());
 
-document.addEventListener('DOMContentLoaded',()=>{document.getElementById('today-date').textContent=formatDateDisplay(new Date());loadExercises();loadHistory();loadMenu();setupFilters()});
+function getLC(){const s=localStorage.getItem('checks_'+TD);return s?JSON.parse(s):{}}
+function setLC(page,idx,v){const d=getLC();if(!d[page])d[page]={};d[page][idx]=v;localStorage.setItem('checks_'+TD,JSON.stringify(d));Object.keys(localStorage).forEach(k=>{if(k.startsWith('checks_')&&k!=='checks_'+TD)localStorage.removeItem(k)})}
 
-async function loadExercises(){try{const r=await fetch(API_URL+'?action=getExercises');const data=await r.json();exercises=data.exercises||[];renderTrainingList();renderWarmupList();renderBedtimeList()}catch(e){document.getElementById('exercise-list').innerHTML='<div class="empty">無法載入動作庫</div>'}}
-async function loadHistory(){try{const r=await fetch(API_URL+'?action=getLog');const data=await r.json();renderHistory(data.records||[])}catch(e){document.getElementById('log-history').innerHTML='<div class="empty">無法載入紀錄</div>'}}
-async function loadMenu(){try{const r=await fetch(API_URL+'?action=getMenu');const data=await r.json();const menu=data.menu||[];if(menu.length>0){document.getElementById('today-menu-section').style.display='block';document.getElementById('menu-banner').textContent='從 Claude Project 取得的菜單 · '+menu.length+' 個動作';document.getElementById('today-menu-list').innerHTML=menu.map(e=>`<div class="ex-item" onclick="startLogFromMenu('${e.id}','${(e.name||'').replace(/'/g,"\\'")}',${e.defaultSets||4},'${e.defaultReps||''}',${e.defaultWeight||0},'${(e.youtube||'').replace(/'/g,"\\'")}')"><div class="ex-num">${e.defaultSets||'-'}</div><div class="ex-info"><div class="ex-name">${e.name}</div><div class="ex-detail">${e.defaultReps||'-'} 次 · ${e.defaultWeight?e.defaultWeight+'kg':'—'}</div></div>${e.youtube?`<a class="ex-yt" href="${e.youtube}" target="_blank" onclick="event.stopPropagation()">▶</a>`:''}</div>`).join('')}}catch(e){}}
+document.addEventListener('DOMContentLoaded',()=>{
+document.getElementById('today-date').textContent=fmtDD(new Date());
+loadEx();loadHist();
+setupFilter('tf',v=>renderTrain(v));
+setupFilter('wf',v=>renderWarmup(v));
+setupFilter('ef',v=>renderEvening(v));
+});
 
-function renderTrainingList(filter='全部'){const list=document.getElementById('exercise-list');const train=exercises.filter(e=>e.type==='訓練');const filtered=filter==='全部'?train:train.filter(e=>e.bodyPart===filter);if(!filtered.length){list.innerHTML='<div class="empty">沒有找到動作</div>';list.className='';return}list.className='ex-list';list.innerHTML=filtered.map(e=>`<div class="ex-item" onclick="startLog('${e.id}')"><div class="ex-num">${e.defaultSets||'-'}</div><div class="ex-info"><div class="ex-name">${e.name}</div><div class="ex-detail">${e.defaultReps||'-'} 次 · ${e.defaultWeight?e.defaultWeight+'kg':'—'} · ${e.equipment||''}</div></div>${e.youtube?`<a class="ex-yt" href="${e.youtube}" target="_blank" onclick="event.stopPropagation()">▶</a>`:''}</div>`).join('')}
+async function loadEx(){try{const r=await fetch(API+'?action=getExercises');const d=await r.json();EX=d.exercises||[];renderTrain('上肢推');renderWarmup('日常拉伸');renderEvening('固定開場');renderBedtime()}catch(e){document.getElementById('train-content').innerHTML='<div class="empty">無法載入</div>'}}
+async function loadHist(){try{const r=await fetch(API+'?action=getLog');const d=await r.json();renderHist(d.records||[])}catch(e){}}
 
-let warmupSection='sedentary',warmupPart='上肢推';
-function renderWarmupList(){const list=document.getElementById('warmup-list');let filtered=[];if(warmupSection==='sedentary'){filtered=exercises.filter(e=>e.type==='熱身'&&e.sedentaryFix==='是')}else if(warmupSection==='warmup'){filtered=exercises.filter(e=>e.type==='熱身'&&e.sedentaryFix!=='是'&&e.bodyPart===warmupPart)}else if(warmupSection==='cooldown'){filtered=exercises.filter(e=>e.type==='收操'&&e.bodyPart===warmupPart&&!(e.notes||'').includes('晚間'))}else if(warmupSection==='evening'){filtered=exercises.filter(e=>(e.notes||'').includes('晚間'))}document.getElementById('warmup-type-filter').style.display=(warmupSection==='warmup'||warmupSection==='cooldown')?'flex':'none';if(!filtered.length){list.innerHTML='<div class="empty">沒有找到動作</div>';list.className='';return}list.className='check-list';list.innerHTML=filtered.map(e=>`<div class="check-item" onclick="toggleCheck(this)"><div class="checkbox">✓</div><div class="ex-info"><div class="ex-name">${e.name}</div><div class="ex-detail">${e.defaultReps||''} ${e.equipment&&e.equipment!=='徒手'?'· '+e.equipment:''}</div></div>${e.youtube?`<a class="ex-yt" href="${e.youtube}" target="_blank" onclick="event.stopPropagation()">▶</a>`:''}</div>`).join('')}
-function toggleCheck(el){el.classList.toggle('done')}
+function renderTrain(v){
+const c=document.getElementById('train-content');
+if(v==='核心'){c.innerHTML=renderExList(EX.filter(e=>e.type==='核心'));return}
+if(v==='居家'){const items=EX.filter(e=>e.type==='居家');c.innerHTML='<div class="mb">10 分鐘有氧循環 · 每個動作 30 秒</div>'+renderCL(items,'home');return}
+if(v==='替補'){c.innerHTML=renderExList(EX.filter(e=>e.type==='訓練'&&(e.bodyPart||'').includes('替補')));return}
+c.innerHTML=renderExList(EX.filter(e=>e.type==='訓練'&&e.bodyPart===v));
+}
 
-function renderBedtimeList(){const list=document.getElementById('bedtime-list');const bedtime=exercises.filter(e=>e.type==='睡前拉伸').sort((a,b)=>{const na=(a.notes||'').match(/\d+/)||[99];const nb=(b.notes||'').match(/\d+/)||[99];return parseInt(na[0])-parseInt(nb[0])});if(!bedtime.length){list.innerHTML='<div class="empty">沒有找到動作</div>';list.className='';return}list.className='check-list';list.innerHTML=bedtime.map((e,i)=>`<div class="check-item" onclick="startBedtimeTimer(${i})" data-index="${i}"><div class="ex-num" style="background:var(--green-soft);color:var(--green)">${i+1}</div><div class="ex-info"><div class="ex-name">${e.name}</div><div class="ex-detail">${e.defaultReps||''}</div></div>${e.youtube?`<a class="ex-yt" href="${e.youtube}" target="_blank" onclick="event.stopPropagation()">▶</a>`:''}</div>`).join('')}
+function renderExList(items){
+if(!items.length)return'<div class="empty">沒有找到動作</div>';
+return'<div class="el">'+items.map(e=>'<div class="ei" onclick="sLog(\''+e.id+'\',\''+esc(e.name)+'\','+(e.defaultSets||4)+',\''+esc(e.defaultReps||'')+'\','+(e.defaultWeight||0)+',\''+esc(e.youtube||'')+'\')"><div class="en">'+(e.defaultSets||'-')+'</div><div class="ef"><div class="nm">'+e.name+'</div><div class="dt">'+(e.defaultReps||'-')+' 次 · '+(e.defaultWeight?e.defaultWeight+'kg':'—')+' · '+(e.equipment||'')+'</div></div>'+(e.youtube?'<a class="yt" href="'+e.youtube+'" target="_blank" onclick="event.stopPropagation()">▶</a>':'')+'</div>').join('')+'</div>'}
 
-function startBedtimeTimer(index){const bedtime=exercises.filter(e=>e.type==='睡前拉伸').sort((a,b)=>{const na=(a.notes||'').match(/\d+/)||[99];const nb=(b.notes||'').match(/\d+/)||[99];return parseInt(na[0])-parseInt(nb[0])});if(index>=bedtime.length){document.getElementById('timer-exercise-name').textContent='全部完成';document.getElementById('timer-display').textContent='✓';return}currentBedtimeIndex=index;const ex=bedtime[index];const card=document.getElementById('bedtime-timer-card');card.style.display='block';card.scrollIntoView({behavior:'smooth',block:'start'});document.getElementById('timer-exercise-name').textContent=`${index+1} / ${bedtime.length}　${ex.name}`;const reps=ex.defaultReps||'60秒';const match=reps.match(/(\d+)/);timerTarget=match?parseInt(match[0]):60;if(reps.includes('分鐘'))timerTarget*=60;if(reps.includes('左右'))timerTarget*=2;timerSeconds=0;timerRunning=false;clearInterval(timerInterval);updateTimerDisplay();document.getElementById('timer-toggle-btn').textContent='開始';document.querySelectorAll('#bedtime-list .check-item').forEach((el,i)=>{el.style.borderLeft=i===index?'3px solid var(--accent)':'none';el.style.paddingLeft=i===index?'13px':'16px'})}
+function renderCL(items,page){
+if(!items.length)return'<div class="empty">沒有找到動作</div>';
+const saved=getLC()[page]||{};
+return'<div class="cl">'+items.map((e,i)=>'<div class="ci'+(saved[i]?' done':'')+'" onclick="togC(this,\''+page+'\','+i+')"><div class="cb">✓</div><div class="ef"><div class="nm">'+e.name+'</div><div class="dt">'+(e.defaultReps||'')+' '+(e.equipment&&e.equipment!=='徒手'?'· '+e.equipment:'')+'</div></div>'+(e.youtube?'<a class="yt" href="'+e.youtube+'" target="_blank" onclick="event.stopPropagation()">▶</a>':'')+'</div>').join('')+'</div>'}
 
-function timerControl(action){if(action==='toggle'){if(timerRunning){clearInterval(timerInterval);timerRunning=false;document.getElementById('timer-toggle-btn').textContent='繼續'}else{timerRunning=true;document.getElementById('timer-toggle-btn').textContent='暫停';timerInterval=setInterval(()=>{timerSeconds++;updateTimerDisplay();if(timerSeconds>=timerTarget){clearInterval(timerInterval);timerRunning=false;document.getElementById('timer-toggle-btn').textContent='完成';if(navigator.vibrate)navigator.vibrate([200,100,200]);const items=document.querySelectorAll('#bedtime-list .check-item');if(items[currentBedtimeIndex])items[currentBedtimeIndex].classList.add('done')}},1000)}}else if(action==='reset'){clearInterval(timerInterval);timerSeconds=0;timerRunning=false;updateTimerDisplay();document.getElementById('timer-toggle-btn').textContent='開始'}else if(action==='next'){clearInterval(timerInterval);timerRunning=false;const items=document.querySelectorAll('#bedtime-list .check-item');if(items[currentBedtimeIndex])items[currentBedtimeIndex].classList.add('done');startBedtimeTimer(currentBedtimeIndex+1)}}
-function updateTimerDisplay(){const remaining=Math.max(0,timerTarget-timerSeconds);const min=Math.floor(remaining/60).toString().padStart(2,'0');const sec=(remaining%60).toString().padStart(2,'0');document.getElementById('timer-display').textContent=`${min}:${sec}`}
+function togC(el,page,idx){el.classList.toggle('done');setLC(page,idx,el.classList.contains('done'))}
 
-function startLog(exId){const ex=exercises.find(e=>e.id===exId);if(!ex)return;currentLogExercise=ex;document.getElementById('log-ex-name').textContent=ex.name;document.getElementById('log-ex-info').textContent=`${ex.bodyPart} · ${ex.equipment} · ${ex.defaultSets}×${ex.defaultReps} ${ex.defaultWeight?'@ '+ex.defaultWeight+'kg':''}`;document.getElementById('log-sets').value='';document.getElementById('log-reps').value='';document.getElementById('log-weight').value=ex.defaultWeight||'';document.getElementById('log-notes').value='';document.getElementById('log-active').style.display='block';document.getElementById('log-empty').style.display='none';switchPage('log');document.getElementById('log-current-exercise').scrollIntoView({behavior:'smooth'})}
-function startLogFromMenu(id,name,sets,reps,weight,youtube){currentLogExercise={id,name,defaultSets:sets,defaultReps:reps,defaultWeight:weight,youtube,bodyPart:'',equipment:''};document.getElementById('log-ex-name').textContent=name;document.getElementById('log-ex-info').textContent=`${sets}×${reps} ${weight?'@ '+weight+'kg':''}`;document.getElementById('log-sets').value='';document.getElementById('log-reps').value='';document.getElementById('log-weight').value=weight||'';document.getElementById('log-notes').value='';document.getElementById('log-active').style.display='block';document.getElementById('log-empty').style.display='none';switchPage('log')}
+function renderWarmup(v){
+const c=document.getElementById('warmup-content');
+if(v==='日常拉伸'){c.innerHTML=renderCL(EX.filter(e=>e.type==='日常拉伸'),'w_daily')}
+else{c.innerHTML=renderCL(EX.filter(e=>e.type==='熱身'&&e.bodyPart===v),'w_'+v)}
+}
 
-async function saveLog(){if(!currentLogExercise)return;const sets=document.getElementById('log-sets').value;const reps=document.getElementById('log-reps').value;const weight=document.getElementById('log-weight').value;const notes=document.getElementById('log-notes').value;if(!sets||!reps){showToast('請填寫組數和次數');return}const record={date:formatDate(new Date()),exerciseId:currentLogExercise.id,exerciseName:currentLogExercise.name,sets:parseInt(sets),reps:parseInt(reps),weight:weight?parseFloat(weight):'',notes:notes};todayLog.push(record);renderTodayLog();try{await fetch(API_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action:'addLog',records:[record]})});showToast('已記錄')}catch(e){showToast('儲存失敗')}document.getElementById('log-sets').value=parseInt(sets)+1;document.getElementById('log-reps').value='';document.getElementById('log-notes').value=''}
-function renderTodayLog(){const list=document.getElementById('log-today-list');if(!todayLog.length){list.innerHTML='<div style="color:var(--text3);font-size:12px;padding:8px 0">尚無紀錄</div>';return}list.innerHTML=todayLog.map(r=>`<div class="history-row"><span>${r.exerciseName}</span><span>第${r.sets}組</span><span>${r.reps}次</span><span>${r.weight?r.weight+'kg':'—'}</span></div>`).join('')}
-function renderHistory(records){const list=document.getElementById('log-history');if(!records.length){list.innerHTML='<div class="empty">尚無歷史紀錄</div>';return}const grouped={};records.reverse().forEach(r=>{const d=r.date||'未知';if(!grouped[d])grouped[d]=[];grouped[d].push(r)});let html='';Object.keys(grouped).slice(0,7).forEach(date=>{html+=`<div class="history-date">${date}</div>`;grouped[date].forEach(r=>{html+=`<div class="history-row"><span>${r.exerciseName}</span><span>第${r.sets}組</span><span>${r.reps}次</span><span>${r.weight?r.weight+'kg':'—'}</span></div>`})});list.innerHTML=html}
+function renderEvening(v){
+document.getElementById('evening-content').innerHTML=renderCL(EX.filter(e=>e.type==='晚間恢復'&&e.bodyPart===v),'e_'+v);
+}
 
-function setupFilters(){document.getElementById('train-filter').addEventListener('click',e=>{if(!e.target.classList.contains('filter-chip'))return;document.querySelectorAll('#train-filter .filter-chip').forEach(c=>c.classList.remove('active'));e.target.classList.add('active');renderTrainingList(e.target.dataset.type)});document.getElementById('warmup-filter').addEventListener('click',e=>{if(!e.target.classList.contains('filter-chip'))return;document.querySelectorAll('#warmup-filter .filter-chip').forEach(c=>c.classList.remove('active'));e.target.classList.add('active');warmupSection=e.target.dataset.section;renderWarmupList()});document.getElementById('warmup-type-filter').addEventListener('click',e=>{if(!e.target.classList.contains('filter-chip'))return;document.querySelectorAll('#warmup-type-filter .filter-chip').forEach(c=>c.classList.remove('active'));e.target.classList.add('active');warmupPart=e.target.dataset.part;renderWarmupList()})}
-function switchPage(page){document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));document.getElementById('page-'+page).classList.add('active');document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));document.querySelector(`.nav-btn[data-page="${page}"]`).classList.add('active');window.scrollTo(0,0)}
-function formatDate(d){return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')}
-function formatDateDisplay(d){const days=['日','一','二','三','四','五','六'];return`${d.getFullYear()}.${String(d.getMonth()+1).padStart(2,'0')}.${String(d.getDate()).padStart(2,'0')}　${days[d.getDay()]}`}
-function showToast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),1800)}
+function renderBedtime(){
+const items=EX.filter(e=>e.type==='睡前拉伸').sort((a,b)=>{const na=(a.notes||'').match(/\d+/)||[99];const nb=(b.notes||'').match(/\d+/)||[99];return parseInt(na[0])-parseInt(nb[0])});
+window._bt=items;
+const saved=getLC()['bed']||{};
+document.getElementById('bedtime-content').innerHTML='<div class="cl">'+items.map((e,i)=>'<div class="ci'+(saved[i]?' done':'')+'" onclick="sBT('+i+')" data-i="'+i+'"><div class="en" style="background:var(--green-soft);color:var(--green)">'+(i+1)+'</div><div class="ef"><div class="nm">'+e.name+'</div><div class="dt">'+(e.defaultReps||'')+'</div></div>'+(e.youtube?'<a class="yt" href="'+e.youtube+'" target="_blank" onclick="event.stopPropagation()">▶</a>':'')+'</div>').join('')+'</div>';
+}
+
+function sBT(i){
+const items=window._bt||[];
+if(i>=items.length){document.getElementById('bt-name').textContent='全部完成';document.getElementById('bt-time').textContent='✓';return}
+BI=i;const e=items[i];
+document.getElementById('bt-card').style.display='block';
+document.getElementById('bt-card').scrollIntoView({behavior:'smooth',block:'start'});
+document.getElementById('bt-name').textContent=(i+1)+' / '+items.length+'　'+e.name;
+const reps=e.defaultReps||'60秒';const m=reps.match(/(\d+)/);TT=m?parseInt(m[0]):60;
+if(reps.includes('分鐘'))TT*=60;if(reps.includes('左右'))TT*=2;
+TS=0;TR=false;clearInterval(TI);uTD();
+document.getElementById('bt-btn').textContent='開始';
+document.querySelectorAll('#bedtime-content .ci').forEach((el,j)=>{el.style.borderLeft=j===i?'3px solid var(--accent)':'none';el.style.paddingLeft=j===i?'13px':'16px'});
+}
+
+function tmr(a){
+if(a==='toggle'){if(TR){clearInterval(TI);TR=false;document.getElementById('bt-btn').textContent='繼續'}else{TR=true;document.getElementById('bt-btn').textContent='暫停';TI=setInterval(()=>{TS++;uTD();if(TS>=TT){clearInterval(TI);TR=false;document.getElementById('bt-btn').textContent='完成';if(navigator.vibrate)navigator.vibrate([200,100,200]);const items=document.querySelectorAll('#bedtime-content .ci');if(items[BI]){items[BI].classList.add('done');setLC('bed',BI,true)}}},1000)}}
+else if(a==='reset'){clearInterval(TI);TS=0;TR=false;uTD();document.getElementById('bt-btn').textContent='開始'}
+else if(a==='next'){clearInterval(TI);TR=false;const items=document.querySelectorAll('#bedtime-content .ci');if(items[BI]){items[BI].classList.add('done');setLC('bed',BI,true)}sBT(BI+1)}}
+function uTD(){const r=Math.max(0,TT-TS);document.getElementById('bt-time').textContent=String(Math.floor(r/60)).padStart(2,'0')+':'+String(r%60).padStart(2,'0')}
+
+function sLog(id,name,sets,reps,wt,yt){
+CUR={id,name,sets,reps,wt,yt};
+document.getElementById('log-nm').textContent=name;
+document.getElementById('log-info').textContent=sets+'×'+reps+(wt?' @ '+wt+'kg':'');
+document.getElementById('l-sets').value='';
+document.getElementById('l-reps').value='';
+document.getElementById('l-wt').value=wt||'';
+document.getElementById('l-note').value='';
+document.getElementById('log-active').style.display='block';
+document.getElementById('log-empty').style.display='none';
+go('log');document.getElementById('log-ex').scrollIntoView({behavior:'smooth'});
+}
+
+async function saveLog(){
+if(!CUR)return;
+const s=document.getElementById('l-sets').value,r=document.getElementById('l-reps').value,w=document.getElementById('l-wt').value,n=document.getElementById('l-note').value;
+if(!s||!r){toast('請填寫組數和次數');return}
+const rec={date:fmtD(new Date()),exerciseId:CUR.id,exerciseName:CUR.name,sets:parseInt(s),reps:parseInt(r),weight:w?parseFloat(w):'',notes:n};
+LOG.push(rec);rTL();
+try{await fetch(API,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action:'addLog',records:[rec]})});toast('已記錄')}catch(e){toast('儲存失敗')}
+document.getElementById('l-sets').value=parseInt(s)+1;document.getElementById('l-reps').value='';document.getElementById('l-note').value=''}
+
+function rTL(){const l=document.getElementById('log-today');if(!LOG.length){l.innerHTML='<div style="color:var(--text3);font-size:12px;padding:8px 0">尚無</div>';return}l.innerHTML=LOG.map(r=>'<div class="hr"><span>'+r.exerciseName+'</span><span>第'+r.sets+'組</span><span>'+r.reps+'次</span><span>'+(r.weight?r.weight+'kg':'—')+'</span></div>').join('')}
+
+function renderHist(records){const l=document.getElementById('log-hist');if(!records.length){l.innerHTML='<div class="empty">尚無歷史紀錄</div>';return}const g={};records.reverse().forEach(r=>{const d=r.date||'?';if(!g[d])g[d]=[];g[d].push(r)});let h='';Object.keys(g).slice(0,7).forEach(d=>{h+='<div class="hd">'+d+'</div>';g[d].forEach(r=>{h+='<div class="hr"><span>'+r.exerciseName+'</span><span>第'+r.sets+'組</span><span>'+r.reps+'次</span><span>'+(r.weight?r.weight+'kg':'—')+'</span></div>'})});l.innerHTML=h}
+
+function setupFilter(id,fn){document.getElementById(id).addEventListener('click',e=>{if(!e.target.classList.contains('fc'))return;document.querySelectorAll('#'+id+' .fc').forEach(c=>c.classList.remove('active'));e.target.classList.add('active');fn(e.target.dataset.v)})}
+
+function go(p){document.querySelectorAll('.page').forEach(x=>x.classList.remove('active'));document.getElementById('page-'+p).classList.add('active');document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));document.querySelector('.nav-btn[data-p="'+p+'"]').classList.add('active');window.scrollTo(0,0)}
+
+function fmtD(d){return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')}
+function fmtDD(d){const w=['日','一','二','三','四','五','六'];return d.getFullYear()+'.'+String(d.getMonth()+1).padStart(2,'0')+'.'+String(d.getDate()).padStart(2,'0')+'　'+w[d.getDay()]}
+function esc(s){return(s||'').replace(/'/g,"\\'")}
+function toast(m){const t=document.getElementById('toast');t.textContent=m;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),1800)}
 </script>
 </body>
 </html>
